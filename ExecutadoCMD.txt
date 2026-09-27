@@ -98,3 +98,96 @@ Found 4 errors.
 [*] 1 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
 PS C:\git\refactor-race-python\src>
 PS C:\git\refactor-race-python\src>
+PS C:\Git\refactor-race-python> pytest -v 
+============================================================================================= test session starts =============================================================================================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0 -- C:\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Git\refactor-race-python
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 9 items                                                                                                                                                                                              
+
+tests/test_checkout.py::test_regular_customer PASSED                                                                                                                                                     [ 11%]
+tests/test_checkout.py::test_vip_customer PASSED                                                                                                                                                         [ 22%]
+tests/test_checkout.py::test_coupon PASSED                                                                                                                                                               [ 33%]
+tests/test_checkout.py::test_duplicate_products PASSED                                                                                                                                                   [ 44%]
+tests/test_checkout.py::test_funcionario PASSED                                                                                                                                                          [ 55%]
+tests/test_checkout.py::test_fretegratis PASSED                                                                                                                                                          [ 66%]
+tests/test_checkout.py::test_desconto_25_por_cento PASSED                                                                                                                                                [ 77%]
+tests/test_checkout.py::test_desconto_exatamente_no_limite PASSED                                                                                                                                        [ 88%]
+tests/test_checkout.py::test_desconto_com_cupom PASSED                                                                                                                                                   [100%]
+============================================================================================= test session starts =============================================================================================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Git\refactor-race-python
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 9 items                                                                                                                                                                                              
+
+tests\test_checkout.py .........                                                                                                                                                                         [100%]
+
+=============================================================================================== tests coverage ================================================================================================
+_______________________________________________________________________________ coverage: platform win32, python 3.14.7-final-0 _______________________________________________________________________________
+
+Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+src\legacy_checkout.py      80      3    96%   73, 91, 94
+------------------------------------------------------
+TOTAL                       80      3    96%
+============================================================================================== 9 passed in 0.29s ==============================================================================================
+PS C:\Git\refactor-race-python> radon cc legacy_checkout.py -s -a 
+PS C:\Git\refactor-race-python> radon mi legacy_checkout.py -s 
+PS C:\Git\refactor-race-python> ruff check legacy_checkout.py --statistics 
+1       E902    io-error
+Found 1 error.
+PS C:\Git\refactor-race-python> 
+PS C:\Git\refactor-race-python> pytest --cov=legacy_checkout --cov-report=term-missing 
+============================================================================================= test session starts =============================================================================================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Git\refactor-race-python
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 12 items                                                                                                                                                                                             
+
+tests\test_checkout.py ............                                                                                                                                                                      [100%]
+
+=============================================================================================== tests coverage ================================================================================================
+_______________________________________________________________________________ coverage: platform win32, python 3.14.7-final-0 _______________________________________________________________________________
+
+Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+src\legacy_checkout.py      80      0   100%
+------------------------------------------------------
+TOTAL                       80      0   100%
+============================================================================================= 12 passed in 0.25s ==============================================================================================
+PS C:\Git\refactor-race-python> 
+PS C:\Git\refactor-race-python> ruff check legacy_checkout.py --statistics             
+1       E902    io-error
+Found 1 error.
+PS C:\Git\refactor-race-python> cd src
+PS C:\Git\refactor-race-python\src> ruff check legacy_checkout.py --statistics 
+PS C:\Git\refactor-race-python\src> radon mi legacy_checkout.py -s                         
+legacy_checkout.py - A (48.60)
+PS C:\Git\refactor-race-python> cd ..
+PS C:\Git\refactor-race-python> pytest --cov=legacy_checkout --cov-report=term-missing 
+============================================================================================= test session starts =============================================================================================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Git\refactor-race-python
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 12 items                                                                                                                                                                                             
+
+tests\test_checkout.py ............                                                                                                                                                                      [100%]
+
+=============================================================================================== tests coverage ================================================================================================
+_______________________________________________________________________________ coverage: platform win32, python 3.14.7-final-0 _______________________________________________________________________________
+
+Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+src\legacy_checkout.py      80      0   100%
+------------------------------------------------------
+TOTAL                       80      0   100%
+============================================================================================= 12 passed in 0.55s ==============================================================================================
