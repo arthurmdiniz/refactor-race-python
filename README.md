@@ -114,3 +114,31 @@ No final, `process_order()` ficou responsável por organizar o processamento.
 Ela chama cada função na ordem necessária, junta os valores, monta o resultado
 final, registra o pedido e devolve o dicionário esperado.
 
+## USO DE INTELIGÊNCIA ARTIFICIAL
+
+- **Ferramenta utilizada:**
+	- GitHub Copilot (integrada ao VSCode).
+
+- **Finalidade:**
+	- Complementar trechos de codigo por meio da sugestao exibida ao pressionar a tecla Tab.
+	- Transformar e organizar textos em formato Markdown.
+	- Ajudar a entender os erros apresentados durante a execucao dos testes e a identificar possiveis ajustes no codigo.
+
+- **Exemplo de sugestao recebida:**
+	- Completar um trecho de codigo durante a digitacao.
+	- Organizar uma explicacao em secoes e listas no README.md.
+	- Apoiar a analise das mensagens de erro apresentadas pelo pytest e pelo Ruff.
+
+- **A sugestao foi aceita, modificada ou rejeitada?**
+	- A sugestao foi revisada antes de ser utilizada.
+	- O texto em Markdown foi ajustado para ficar de acordo com o que foi realizado (era texto livre e foi formatado em Markdown, conforme estrutura do tópicos existente no PDF da atividade).
+
+- **Como a equipe validou a solucao?**
+	- Revisao do codigo.
+	- Execucao dos testes automatizados com pytest.
+	- Os testes foram executados novamente depois dos ajustes e passaram.
+	- A execucao mais recente registrou 12 testes passando e 100% de cobertura.
+	- Execucao do Ruff para verificar o lint.
+	- Execucao do Radon para analisar a complexidade e a manutenibilidade.
+	- A assinatura de process_order() e as chaves do dicionario retornado foram mantidas.
+
