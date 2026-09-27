@@ -8,4 +8,4 @@
 | Índice de manutenibilidade | A (51.69) | A (48.60) |
 | Problemas identificados pelo Ruff | 4 (3x SIM102, 1x PLR1730) | 0 (`All checks passed!`) |
 | Quantidade de testes | 4 | 12 |
-| Linhas de código (LOC) | 126 | 141 |
+| Linhas de código (LOC) | 127 | 141 |
