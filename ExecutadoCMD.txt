@@ -1,0 +1,100 @@
+PS C:\git\refactor-race-python> pytest --cov=legacy_checkout --cov-report=term-missing
+================================================= test session starts =================================================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\git\refactor-race-python
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 4 items
+
+tests\test_checkout.py ....                                                                                      [100%]
+
+=================================================== tests coverage ====================================================
+___________________________________ coverage: platform win32, python 3.14.7-final-0 ___________________________________
+
+Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+src\legacy_checkout.py      72     12    83%   27, 30, 41, 44, 48, 66, 69, 78-83
+------------------------------------------------------
+TOTAL                       72     12    83%
+================================================== 4 passed in 0.16s ==================================================
+PS C:\git\refactor-race-python>
+PS C:\git\refactor-race-python> cd src
+PS C:\git\refactor-race-python\src> radon cc legacy_checkout.py -s -a
+legacy_checkout.py
+    F 6:0 process_order - E (34)
+
+1 blocks (classes, functions, methods) analyzed.
+Average complexity: E (34.0)
+PS C:\git\refactor-race-python\src>
+PS C:\git\refactor-race-python\src> radon mi legacy_checkout.py -s
+legacy_checkout.py - A (51.69)
+PS C:\git\refactor-race-python\src>
+PS C:\git\refactor-race-python\src> ruff check legacy_checkout.py
+SIM102 Use a single `if` statement instead of nested `if` statements
+  --> legacy_checkout.py:32:13
+   |
+30 |               desconto = subtotal * 0.20
+31 |           else:
+32 | /             if customer["type"] == "regular":
+33 | |                 if subtotal >= 800:
+   | |___________________________________^
+34 |                       desconto = subtotal * 0.05
+   |
+help: Combine `if` statements using `and`
+
+PLR1730 [*] Replace `if` statement with `desconto = min(desconto, subtotal * 0.25)`
+  --> legacy_checkout.py:47:5
+   |
+46 |       # desconto máximo permitido
+47 | /     if desconto > subtotal * 0.25:
+48 | |         desconto = subtotal * 0.25
+   | |__________________________________^
+49 |
+50 |       valor_com_desconto = subtotal - desconto
+   |
+help: Replace with `desconto = min(desconto, subtotal * 0.25)`
+   |
+46 |     # desconto máximo permitido
+   -     if desconto > subtotal * 0.25:
+   -         desconto = subtotal * 0.25
+47 +     desconto = min(desconto, subtotal * 0.25)
+48 |
+   |
+
+SIM102 Use a single `if` statement instead of nested `if` statements
+   --> legacy_checkout.py:100:13
+    |
+ 98 |       for i in range(len(items)):
+ 99 |           for j in range(len(items)):
+100 | /             if i != j:
+101 | |                 if items[i]["name"] == items[j]["name"]:
+102 | |                     if items[i]["name"] not in duplicados:
+    | |__________________________________________________________^
+103 |                           duplicados.append(items[i]["name"])
+    |
+help: Combine `if` statements using `and`
+
+SIM102 Use a single `if` statement instead of nested `if` statements
+   --> legacy_checkout.py:101:17
+    |
+ 99 |           for j in range(len(items)):
+100 |               if i != j:
+101 | /                 if items[i]["name"] == items[j]["name"]:
+102 | |                     if items[i]["name"] not in duplicados:
+    | |__________________________________________________________^
+103 |                           duplicados.append(items[i]["name"])
+    |
+help: Combine `if` statements using `and`
+
+Found 4 errors.
+[*] 1 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
+PS C:\git\refactor-race-python\src>
+PS C:\git\refactor-race-python\src>
+PS C:\git\refactor-race-python\src> ruff check legacy_checkout.py --statistics
+3       SIM102  [ ] collapsible-if
+1       PLR1730 [*] if-stmt-min-max
+Found 4 errors.
+[*] 1 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).
+PS C:\git\refactor-race-python\src>
+PS C:\git\refactor-race-python\src>
